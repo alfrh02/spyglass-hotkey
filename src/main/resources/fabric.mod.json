@@ -12,9 +12,6 @@
   "entrypoints": {
     "client": [
       "land.alfred.spyglasshotkey.client.SpyglassHotkeyClient"
-    ],
-    "main": [
-      "land.alfred.spyglasshotkey.SpyglassHotkey"
     ]
   },
   "depends": {
