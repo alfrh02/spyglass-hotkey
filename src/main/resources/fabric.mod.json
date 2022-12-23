@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "spyglass-hotkey",
-  "version": "${version}",
+  "version": "1.0.0",
   "name": "Spyglass Hotkey",
   "description": "Vanilla-friendly spyglass toggle keybind.",
   "authors": ["alfr02"],
