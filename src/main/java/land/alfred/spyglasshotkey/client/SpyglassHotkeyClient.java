@@ -32,7 +32,6 @@ public class SpyglassHotkeyClient implements ClientModInitializer {
                 "category." + SpyglassHotkey.MODID + ".keybind"));
 
         ClientTickEvents.END_CLIENT_TICK.register(client -> {
-            PacketByteBuf buf = PacketByteBufs.create().writeString("" + client.player.getName());
             while (spyglassKeybind.wasPressed()) {
                 if (client.player.getInventory().contains(new ItemStack(Items.SPYGLASS))) {
                     if (client.player.getOffHandStack().getItem() == Items.SPYGLASS) {
@@ -41,7 +40,10 @@ public class SpyglassHotkeyClient implements ClientModInitializer {
                     if (client.player.getInventory().getStack(client.player.getInventory().selectedSlot).getItem() == Items.SPYGLASS && spyglassStackInfo != null) {
                         client.player.setStackInHand(Hand.MAIN_HAND, handStackInfo);
                         client.player.getInventory().setStack(spyglassSlot, spyglassStackInfo);
-                        ClientPlayNetworking.send(SpyglassHotkeyServer.SWAPPING_ID, buf);
+                        ClientPlayNetworking.send(SpyglassHotkeyServer.SWAPPING_ID, PacketByteBufs.create()
+                                .writeItemStack(spyglassStackInfo));
+                        ClientPlayNetworking.send(SpyglassHotkeyServer.SWAPPING_ID, PacketByteBufs.create()
+                                .writeItemStack(handStackInfo));
                     } else {
                         spyglassSlot = client.player.getInventory().getSlotWithStack(new ItemStack(Items.SPYGLASS));
                         currentSlot = client.player.getInventory().selectedSlot;
@@ -54,8 +56,13 @@ public class SpyglassHotkeyClient implements ClientModInitializer {
                         handStackInfo = client.player.getInventory().getStack(currentSlot);
 
                         client.player.setStackInHand(Hand.MAIN_HAND, spyglassStackInfo);
+
+                        ClientPlayNetworking.send(SpyglassHotkeyServer.SWAPPING_ID, PacketByteBufs.create()
+                                                                                    .writeItemStack(spyglassStackInfo));
+
                         client.player.getInventory().setStack(spyglassSlot, handStackInfo);
-                        ClientPlayNetworking.send(SpyglassHotkeyServer.SWAPPING_ID, buf);
+                        ClientPlayNetworking.send(SpyglassHotkeyServer.SWAPPING_ID, PacketByteBufs.create()
+                                                                                    .writeItemStack(handStackInfo));
                     }
                 }
             }
