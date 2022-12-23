@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "spyglass-hotkey",
+  "version": "${version}",
+  "name": "Spyglass Hotkey",
+  "description": "Vanilla-friendly spyglass toggle keybind.",
+  "authors": ["alfr02"],
+  "contact": {},
+  "license": "MIT",
+  "icon": "assets/spyglass-hotkey/icon.png",
+  "environment": "*",
+  "entrypoints": {
+    "client": [
+      "land.alfred.spyglasshotkey.client.SpyglassHotkeyClient"
+    ],
+    "main": [
+      "land.alfred.spyglasshotkey.SpyglassHotkey"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=0.14.12",
+    "fabric": "*",
+    "minecraft": "1.19.2"
+  }
+}
